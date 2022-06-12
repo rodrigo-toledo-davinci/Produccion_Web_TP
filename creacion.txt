@@ -1,0 +1,60 @@
+CREATE DATABASE tienda_compu;
+
+USE tienda_compu;
+
+CREATE TABLE categorias (
+    
+    id int(10) unsigned NOT null AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(50) NOT null
+    
+)ENGINE=INNODB;
+
+CREATE TABLE productos(
+    
+    id_productos int(10) unsigned NOT null AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(255) NOT null,
+    descripcion text NOT null,
+    precio float(8,2) NOT null,
+    id_categoria int(10) unsigned not null,
+    fecha_alta datetime not null,
+    fecha_modificacion datetime not null,
+    fecha_baja datetime,
+    
+    FOREIGN KEY(id_categoria) 
+    REFERENCES categorias(id)
+    ON UPDATE CASCADE
+    
+)ENGINE=INNODB;
+
+CREATE TABLE roles(
+    id tinyint(2) unsigned NOT null AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(30) NOT null
+)ENGINE=INNODB;
+
+CREATE TABLE usuarios(
+    id int(10) unsigned NOT null AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(100) NOT null,
+    email varchar(200) NOT null UNIQUE,
+    contrasena text NOT null,
+    id_rol tinyint(2) unsigned NOT null,
+    fecha_alta datetime not null,
+    fecha_modificacion datetime not null,
+    fecha_baja datetime,
+    FOREIGN KEY(id_rol)
+    REFERENCES roles(id)
+    on UPDATE CASCADE
+)ENGINE=INNODB;
+
+CREATE TABLE compras(
+    id int(10) unsigned NOT null AUTO_INCREMENT PRIMARY KEY,
+    id_producto int(10) unsigned NOT null,
+    id_usuario int(10) unsigned NOT null,
+    fecha datetime not null,
+
+    FOREIGN KEY(id_producto)
+    REFERENCES productos(id_productos),
+
+    FOREIGN KEY(id_usuario)
+    REFERENCES usuarios(id)
+
+)
