@@ -63,7 +63,7 @@ CREATE TABLE `compras` (
 --
 
 CREATE TABLE `productos` (
-  `id_productos` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
   `precio` float(8,2) NOT NULL,
